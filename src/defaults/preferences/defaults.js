@@ -1,0 +1,2 @@
+
+pref('extensions.spearch.engines', '{"$default": {"url":"https://www.google.com/search?q=%s", "ac_url":"http://suggestqueries.google.com/complete/search?client=firefox&q=%s"},"wiki": {"url":"https://en.wikipedia.org/w/index.php?search=%s&title=Special%3ASearch", "ac_url":"http://en.wikipedia.org/w/api.php?action=opensearch&search=%s"}, "youtube": {"url":"http://www.youtube.com/results?search_query=%s", "ac_url":"http://suggestqueries.google.com/complete/search?ds=yt&client=firefox&hjson=t&cp=1&q=%s&alt=json"}}');

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" width="500" height="350">
+ <script src="spearch.jsm" />
+ <script src="spearch.ui.options.jsm" />
+ <prefpane flex="1" onpaneload="spearch.ui.options.loadEngines()">
+
+  <preferences>
+   <preference id="pref_engines" name="extensions.spearch.engines" type="string" />
+  </preferences>
+
+   <groupbox flex="1">
+    <caption label="Engines" />
+  <hbox flex="1">
+   <tree flex="2" editable="true" id="spearch-engine-tree"
+         preference="pref_engines" preference-editable="true" onsynctopreference="return spearch.ui.options.syncEnginesToPreference()">
+    <treecols>
+     <treecol id="engine-col" label="Engine" flex="1" sort="label" sortActive="true" sortDirection="ascending" />
+     <treecol label="URL" flex="4" />
+     <treecol label="Autocomplete URL" flex="4" />
+    </treecols>
+    <treechildren />
+   </tree>
+   <vbox>
+    <button label="Add" oncommand="spearch.ui.options.addEmptyEngine()" />
+    <button label="Remove" oncommand="spearch.ui.options.removeSelectedEngines()" />
+   </vbox>
+  </hbox>
+   </groupbox>
+
+ </prefpane>
+</prefwindow>

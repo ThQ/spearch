@@ -1,0 +1,38 @@
+#spearch .engine
+{
+   background-color:#D4D5FF;
+   border-radius:2px;
+   margin:0 4px 0 0;
+   padding:0;
+   color:#888888;
+}
+
+#spearch hbox
+{
+   padding:0;
+   margin:0;
+}
+
+#spearch box
+{
+   padding:0;
+   margin:0;
+}
+
+#spearch .engine box
+{
+   margin:0;
+   padding:2px 2px 2px 0;
+}
+
+#spearch-query
+{
+   padding:0;
+}
+
+#spearch-engine
+{
+   color:#000000;
+   padding:2px 0 2px 4px;
+   margin:0;
+}
