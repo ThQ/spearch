@@ -214,13 +214,21 @@ spearch.ui =
       var rawQuery = queryWidget.value;
       var engineName = spearch.query.getEngineName(rawQuery);
 
-      if (engineName.length > 0 && spearch.pref.hasEngine(engineName) === true)
+      if (engineName.length > 0)
       {
-         queryWidget.value = spearch.query.removeEngine(rawQuery);
-         queryWidget.searchParam = engineName;
+         if (engineName === "_")
+         {
+            queryWidget.value = spearch.query.removeEngine(rawQuery);
+            spearch.ui.removeEngine();
+         }
+         else if (spearch.pref.hasEngine(engineName) === true)
+         {
+            queryWidget.value = spearch.query.removeEngine(rawQuery);
+            queryWidget.searchParam = engineName;
 
-         spearch.ui.getEngineWidget().value = engineName;
-         spearch.ui.getEngineWidget().parentNode.hidden = false;
+            spearch.ui.getEngineWidget().value = engineName;
+            spearch.ui.getEngineWidget().parentNode.hidden = false;
+         }
       }
    },
 
