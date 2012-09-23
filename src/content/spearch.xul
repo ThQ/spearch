@@ -3,22 +3,23 @@
 <?xml-stylesheet href="chrome://spearch/content/spearch.css" type="text/css"?>
 
 <overlay id="spearch" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<script src="spearch.js" />
+   <script src="spearch.js" />
 
-	<toolbarpalette id="BrowserToolbarPalette">
-		<toolbaritem id="spearch" removable="true" label="Spearch" flex="100">
-			<textbox tabindex="1"
-				id="spearch-query"
-				placeholder="Spearch !"
-				flex="1"
-				type="autocomplete"
-				autocompletesearch="spearch-autocomplete"
-				autocompletesearchparam=""
-				tabscrolling="true"
-				showcommentcolumn="true"
-				onkeyup="spearch.ui.onKeyUp(event)"
-				onkeydown="return spearch.ui.onKeyPress(event)"
-            oninput="spearch.ui.onInput(event)">
+   <toolbarpalette id="BrowserToolbarPalette">
+      <toolbaritem id="spearch" removable="true" label="Spearch" flex="100">
+         <textbox tabindex="1"
+          id="spearch-query"
+          context="autocomp"
+          placeholder="Spearch !"
+          flex="1"
+          type="autocomplete"
+          autocompletesearch="spearch-autocomplete"
+          autocompletesearchparam=""
+          tabscrolling="true"
+          showcommentcolumn="true"
+          onkeyup="return spearch.ui.onKeyUp(event)"
+          onkeydown="return spearch.ui.onKeyDown(event)"
+          oninput="spearch.ui.onInput(event)">
             <box align="start">
                <box class="engine" hidden="true">
                   <label value="default" id="spearch-engine" onclick="spearch.ui.editEngine()" />
@@ -26,13 +27,14 @@
                </box>
             </box>
             <hbox align="end">
+               <box class="command" hidden="true">
+                  <label value="⇧" />
+                  <label id="spearch-command" />
+               </box>
                <image src="chrome://spearch/content/magnifier.png" onclick="spearch.ui.onSearchButtonClick(event)" height="16" width="16" />
             </hbox>
-			</textbox>
-			<panel
-         type="autocomplete-richlistbox"
-         id="spearch-suggestions"
-				noautofocus="true" />
-		</toolbaritem>
-	</toolbarpalette>
+         </textbox>
+         <panel type="autocomplete-richlistbox" id="spearch-suggestions" noautofocus="true" />
+      </toolbaritem>
+   </toolbarpalette>
 </overlay>

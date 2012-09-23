@@ -61,6 +61,11 @@ spearch.ui =
       }
    },
 
+   getCommandWidget: function ()
+   {
+      return spearch.document.getElementById("spearch-command");
+   },
+
    getEngineWidget: function ()
    {
       return spearch.document.getElementById("spearch-engine");
@@ -83,6 +88,15 @@ spearch.ui =
       return rawQuery;
    },
 
+   hideCommand: function ()
+   {
+      if (spearch.ui.getCommandWidget().parentNode.hidden === false)
+      {
+         spearch.ui.getCommandWidget().parentNode.hidden = true;
+         spearch.ui.getCommandWidget().value = "";
+      }
+   },
+
    isEditingEngine: function ()
    {
       var queryWidget = spearch.ui.getQueryWidget();
@@ -102,6 +116,11 @@ spearch.ui =
          }
       }
       return false;
+   },
+
+   isInCommand: function ()
+   {
+      return spearch.ui.getCommandWidget().parentNode.hidden === false;
    },
 
    movePreviousWord: function () {
@@ -147,9 +166,19 @@ spearch.ui =
       spearch_input.selectionEnd = word_end;
    },
 
-   onKeyPress: function (e)
+   onKeyDown: function (e)
    {
-      if (e)
+      if (e.shiftKey === true)
+      {
+         spearch.ui.showCommand();
+      }
+
+      if (spearch.ui.isInCommand())
+      {
+         spearch.ui.getCommandWidget().value = String.fromCharCode(e.keyCode);
+         return false;
+      }
+      else
       {
          // <return>
          if (e.keyCode === 8)
@@ -175,6 +204,11 @@ spearch.ui =
 
    onKeyUp: function (e)
    {
+      if (e.keyCode === 16)
+      {
+         spearch.ui.hideCommand();
+      }
+
       // enter
       if (e.keyCode === 13)
       {
@@ -186,8 +220,9 @@ spearch.ui =
          {
             spearch.ui.submit();
          }
+         return false;
       }
-      else if (e.shiftKey)
+      else if (spearch.ui.isInCommand())
       {
          // b
          if (e.keyCode === 66)
@@ -204,7 +239,10 @@ spearch.ui =
          {
             spearch.ui.moveNextWord();
          }
+         spearch.ui.getCommandWidget().value = "";
+         return false;
       }
+      return true;
    },
 
    onInput: function (e)
@@ -261,6 +299,15 @@ spearch.ui =
          imageUrl = "chrome://mozapps/skin/places/defaultFavicon.png";
       }
       //spearch.ui.getQueryWidget().getElementsByTagName("image")[0].setAttribute("src", imageUrl);
+   },
+
+   showCommand: function ()
+   {
+      if (spearch.ui.getCommandWidget().parentNode.hidden === true)
+      {
+         spearch.ui.getCommandWidget().parentNode.hidden = false;
+         spearch.ui.getCommandWidget().value = "";
+      }
    },
 
    submit: function ()

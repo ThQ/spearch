@@ -7,6 +7,23 @@
    color:#888888;
 }
 
+#spearch .command
+{
+   background-color:#F0E59B;
+   border-radius:2px;
+   margin:0 4px 0 0;
+   padding:0;
+   color:#8B8349;
+}
+
+#spearch .command
+{
+   margin-left:0;
+   margin-right:0;
+   padding-left:0;
+   padding-right:0;
+}
+
 #spearch hbox
 {
    padding:0;

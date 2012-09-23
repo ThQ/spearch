@@ -59,7 +59,6 @@ spearch.pref =
 
    hasEngine: function (engineName)
    {
-      dump("[" + engineName + "]" + spearch.pref.getEngines()[engineName] + "\n");
       return (engineName in spearch.pref.getEngines());
    }
 };
