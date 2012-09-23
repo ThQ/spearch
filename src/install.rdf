@@ -13,7 +13,8 @@
                    em:name="Spearch"
                    em:version="0.0.1"
                    em:creator="Thomas Quémard"
-                   em:description="Search faster">
+                   em:homepageURL="https://github.com/ThQ/spearch"
+                   em:description="An improved search bar">
     <em:targetApplication RDF:resource="rdf:#$XibHr"/>
     <em:file RDF:resource="urn:mozilla:extension:file:"/>
     <em:optionsURL>chrome://spearch/content/options.xul</em:optionsURL>
