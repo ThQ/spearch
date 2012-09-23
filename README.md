@@ -18,6 +18,7 @@ Select `/path/to/spearch/spearch.xpi`
 
 * `my search` will search for `my search` using the default engine
 * `!youtube my search` will search for `my search` using the engine named `youtube`
+* `!_` will remove the current engine
 * `shift + e` will edit the engine
 * `shift + w` will move one word forward
 * `shift + b` will move one word backward
