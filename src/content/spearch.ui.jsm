@@ -48,7 +48,7 @@ spearch.ui =
       }
       else
       {
-         newQuery = "!" + engineWidget.value;
+         newQuery = "!" + engineWidget.value + " ";
          newQuery += qry;
 
          engineWidget.parentNode.hidden = true;
@@ -151,6 +151,7 @@ spearch.ui =
    {
       if (e)
       {
+         // <return>
          if (e.keyCode === 8)
          {
             if (spearch.ui.getEngineWidget().parentNode.hidden === false && spearch.ui.getQueryWidget().value === "")
@@ -192,13 +193,13 @@ spearch.ui =
          if (e.keyCode === 66)
          {
             spearch.ui.movePreviousWord();
-         // e
          }
+         // e
          else if (e.keyCode === 69)
          {
             spearch.ui.editEngine();
-         // w
          }
+         // w
          else if (e.keyCode === 87)
          {
             spearch.ui.moveNextWord();
@@ -208,28 +209,18 @@ spearch.ui =
 
    onInput: function (e)
    {
+      var queryWidget = spearch.ui.getQueryWidget();
       var query = spearch.ui.getRawQuery();
-      var queryWithoutEngine = spearch.ui.getQueryWidget().value;
-      var engineName = spearch.query.getEngineName(queryWithoutEngine);
-      var engineImageUrl = "";
+      var rawQuery = queryWidget.value;
+      var engineName = spearch.query.getEngineName(rawQuery);
 
-      if (engineName !== "")
+      if (engineName.length > 0 && spearch.pref.hasEngine(engineName) === true)
       {
-         if (spearch.pref.hasEngine(engineName))
-         {
-            engineImageUrl = spearch.pref.getEngineImage(engineName);
-            spearch.ui.setImage(engineImageUrl);
-            spearch.ui.getQueryWidget().value = spearch.query.removeEngine(queryWithoutEngine);
-            spearch.ui.getQueryWidget().searchParam = engineName;
-            spearch.ui.getEngineWidget().value = engineName;
-            spearch.ui.getEngineWidget().parentNode.hidden = false;
-         }
-         else
-         {
-            //spearch.ui.getEngineWidget().value = "";
-            //spearch.ui.getEngineWidget().hidden = true;
-            spearch.ui.getQueryWidget().searchParam = "";
-         }
+         queryWidget.value = spearch.query.removeEngine(rawQuery);
+         queryWidget.searchParam = engineName;
+
+         spearch.ui.getEngineWidget().value = engineName;
+         spearch.ui.getEngineWidget().parentNode.hidden = false;
       }
    },
 
@@ -264,17 +255,20 @@ spearch.ui =
       //spearch.ui.getQueryWidget().getElementsByTagName("image")[0].setAttribute("src", imageUrl);
    },
 
-   submit: function () {
+   submit: function ()
+   {
       var url = spearch.query.renderUrl(spearch.ui.getRawQuery());
       spearch.getBrowser().loadURI(url);
    },
 
-   submitInNewTab: function () {
+   submitInNewTab: function ()
+   {
       var url = spearch.query.renderUrl(spearch.ui.getRawQuery());
       spearch.getBrowser().selectedTab = spearch.getBrowser().addTab(url);
    },
 
-   updateImage: function () {
+   updateImage: function ()
+   {
       var query = spearch.ui.getRawQuery();
       var engineName = spearch.query.getEngineName(query);
       var engineImageUrl = spearch.pref.getEngineImage(engineName);

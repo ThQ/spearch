@@ -8,7 +8,6 @@
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbaritem id="spearch" removable="true" label="Spearch" flex="100">
 			<textbox tabindex="1"
-				accesskey="K"
 				id="spearch-query"
 				placeholder="Spearch !"
 				flex="1"

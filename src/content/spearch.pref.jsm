@@ -59,7 +59,8 @@ spearch.pref =
 
    hasEngine: function (engineName)
    {
-      return spearch.pref.getEngines().hasOwnProperty(engineName);
+      dump("[" + engineName + "]" + spearch.pref.getEngines()[engineName] + "\n");
+      return (engineName in spearch.pref.getEngines());
    }
 };
 

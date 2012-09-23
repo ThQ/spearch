@@ -14,19 +14,17 @@ spearch.query =
       if (bangPos !== -1)
       {
          bangPos += 1;
-         var engine_end_pos = spearch.str.indexOfSpace(query, bangPos);
-         if (engine_end_pos === -1)
+         var spacePos = spearch.str.indexOfSpace(query, bangPos);
+         if (spacePos !== -1)
          {
-            engine_end_pos = query.length;
+            return query.substring(bangPos, spacePos);
          }
-         return query.substring(bangPos, engine_end_pos);
       }
       return "";
    },
 
    removeEngine: function (query)
    {
-      query = query.trim();
       var newQuery = query;
       var bangPos = query.indexOf("!", 0);
       var spacePos = 0;
@@ -34,10 +32,10 @@ spearch.query =
       if (bangPos !== -1)
       {
          spacePos = spearch.str.indexOfSpace(query, bangPos);
-         newQuery = query.substring(0, bangPos);
          if (spacePos !== -1)
          {
-             newQuery += query.substring(spacePos, query.length);
+             newQuery = query.substring(0, bangPos);
+             newQuery += query.substring(spacePos + 1, query.length);
          }
       }
       return newQuery;

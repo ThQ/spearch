@@ -152,15 +152,8 @@ spearch.autocomplete.SearchProvider.prototype =
    classDescription : "Spearch AutoComplete",
    contractID :       '@mozilla.org/autocomplete/search;1?name=spearch-autocomplete',
 
-   startSearch: function (searchString, engineName, previousResult, listener)
+   startSearch: function (query, engineName, previousResult, listener)
    {
-      var query = searchString;
-      if (engineName.length !== 0)
-      {
-         query = "!" + engineName + " " + query;
-      }
-
-      var queryWithoutEngine = spearch.query.removeEngine(query);
       var engines = {};
       var i = 0;
       var suggs = [];
@@ -179,7 +172,7 @@ spearch.autocomplete.SearchProvider.prototype =
             {
                suggs[i] = [];
                suggs[i][0] = "";
-               suggs[i][1] = '!' + engineName + ' ' + queryWithoutEngine;
+               suggs[i][1] = '!' + engineName + ' ' + query;
                ++i;
             }
          }
@@ -197,7 +190,7 @@ spearch.autocomplete.SearchProvider.prototype =
          if (spearch.pref.hasEngine(engineName))
          {
             acUrl = spearch.pref.getEngine(engineName).ac_url;
-            acUrl = acUrl.replace("%s", queryWithoutEngine);
+            acUrl = acUrl.replace("%s", query);
 
             this.acResultListener = new spearch.autocomplete.ResultListener(engineName, this, listener);
 
