@@ -46,14 +46,13 @@ spearch.autocomplete.ResultListener.prototype =
       {
          result = [];
          result[0];
-         result[1] = (this.engineName[0] != '$') ? "!" + this.engineName + " " : "";
-         result[1] += resultsObj[1][i];
+         result[1] = resultsObj[1][i];
          results.push(result);
       }
 
       if (this.listener)
       {
-         var autocomplete_result = new spearch.autocomplete.ResultProvider(results);
+         var autocomplete_result = new spearch.autocomplete.ResultProvider(this.engineName, results);
          this.listener.onSearchResult(this.ac_search, autocomplete_result);
       }
    }
@@ -67,8 +66,9 @@ spearch.autocomplete.ResultListener.prototype =
 // Implements nsIAutoCompleteResult
 // https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIAutoCompleteResult
 
-spearch.autocomplete.ResultProvider = function (results)
+spearch.autocomplete.ResultProvider = function (engineName, results)
 {
+   this._engineName = engineName;
    this._results = results;
 }
 
@@ -177,7 +177,7 @@ spearch.autocomplete.SearchProvider.prototype =
             }
          }
 
-         acResultProvider = new spearch.autocomplete.ResultProvider(suggs);
+         acResultProvider = new spearch.autocomplete.ResultProvider(engineName, suggs);
          listener.onSearchResult(this, acResultProvider);
       }
       else

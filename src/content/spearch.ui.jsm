@@ -9,6 +9,10 @@ Components.utils.import('chrome://spearch/content/spearch.str.jsm');
 
 spearch.ui =
 {
+   queryElement: null,
+   engineElement: null,
+   commandElement: null,
+
    editEngine: function ()
    {
       var queryWidget = spearch.ui.getQueryWidget();
@@ -63,17 +67,17 @@ spearch.ui =
 
    getCommandWidget: function ()
    {
-      return spearch.document.getElementById("spearch-command");
+      return spearch.ui.commandElement;
    },
 
    getEngineWidget: function ()
    {
-      return spearch.document.getElementById("spearch-engine");
+      return spearch.ui.engineElement;
    },
 
    getQueryWidget: function ()
    {
-      return spearch.document.getElementById("spearch-query");
+      return spearch.ui.queryElement;
    },
 
    getRawQuery: function ()
@@ -283,6 +287,13 @@ spearch.ui =
             spearch.ui.submit();
          }
       }
+   },
+
+   onWindowLoad: function (e)
+   {
+      spearch.ui.commandElement = spearch.document.getElementById("spearch-command");
+      spearch.ui.engineElement = spearch.document.getElementById("spearch-engine");
+      spearch.ui.queryElement = spearch.document.getElementById("spearch-query");
    },
 
    removeEngine: function ()

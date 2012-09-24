@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
-<?xml-stylesheet href="chrome://global/content/xul" type="text/css"?>
-<?xml-stylesheet href="chrome://spearch/content/spearch.css" type="text/css"?>
+<?xml-stylesheet href="chrome://global/content/xul" type="text/css" ?>
+<?xml-stylesheet href="chrome://spearch/content/spearch.css" type="text/css" ?>
 
 <overlay id="spearch" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
    <script src="spearch.js" />
+   <script src="spearch.ui.jsm" />
 
    <toolbarpalette id="BrowserToolbarPalette">
       <toolbaritem id="spearch" removable="true" label="Spearch" flex="100">
@@ -37,4 +38,7 @@
          <panel type="autocomplete-richlistbox" id="spearch-suggestions" noautofocus="true" />
       </toolbaritem>
    </toolbarpalette>
+   <script>
+      window.addEventListener("load", spearch.ui.onWindowLoad, false);
+   </script>
 </overlay>
