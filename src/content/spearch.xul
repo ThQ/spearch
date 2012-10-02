@@ -23,7 +23,7 @@
           oninput="spearch.ui.onInput(event)">
             <box align="start">
                <box class="engine" hidden="true">
-                  <label value="default" id="spearch-engine" onclick="spearch.ui.editEngine()" />
+                  <label value="$default" id="spearch-engine" onclick="spearch.ui.editEngine()" />
                   <label value="⨯" onclick="spearch.ui.removeEngine()" />
                </box>
             </box>
