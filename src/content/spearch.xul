@@ -27,13 +27,6 @@
                   <label value="⨯" onclick="spearch.ui.removeEngine()" />
                </box>
             </box>
-            <hbox align="end">
-               <box class="command" hidden="true">
-                  <label value="⇧" />
-                  <label id="spearch-command" />
-               </box>
-               <image src="chrome://spearch/content/magnifier.png" onclick="spearch.ui.onSearchButtonClick(event)" height="16" width="16" />
-            </hbox>
          </textbox>
          <panel type="autocomplete-richlistbox" id="spearch-suggestions" noautofocus="true" />
       </toolbaritem>
