@@ -16,6 +16,7 @@ spearch.autocomplete = {};
 
 spearch.autocomplete.ResultListener = function (engineName, ac_search, listener)
 {
+   this.discarded = false;
    this.results = "";
    this.engineName = engineName;
    this.ac_search = ac_search;
@@ -50,7 +51,7 @@ spearch.autocomplete.ResultListener.prototype =
          results.push(result);
       }
 
-      if (this.listener)
+      if (this.listener && this.discarded === false)
       {
          var autocomplete_result = new spearch.autocomplete.ResultProvider(this.engineName, results);
          this.listener.onSearchResult(this.ac_search, autocomplete_result);
@@ -161,6 +162,7 @@ spearch.autocomplete.SearchProvider.prototype =
       var acResultProvider = null;
       var acUrl = "";
 
+      /*
       if (spearch.ui.isEditingEngine())
       {
          engines = spearch.pref.getEngines();
@@ -182,6 +184,7 @@ spearch.autocomplete.SearchProvider.prototype =
       }
       else
       {
+*/
          if (engineName === "")
          {
             engineName = "$default";
@@ -199,11 +202,15 @@ spearch.autocomplete.SearchProvider.prototype =
                      .newChannel(acUrl, null, null);
             ioChan.asyncOpen(this.acResultListener, null);
          }
-      }
+      //}
    },
 
    stopSearch: function()
    {
+      if (this.acResultListener !== NULL)
+      {
+         this.acResultListener.discard();
+      }
    },
 
    QueryInterface: XPCOMUtils.generateQI([ Components.interfaces.nsIAutoCompleteSearch ])

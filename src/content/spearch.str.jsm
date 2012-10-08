@@ -1,5 +1,6 @@
 var EXPORTED_SYMBOLS = [];
 
+
 Components.utils.import('chrome://spearch/content/spearch.jsm');
 
 

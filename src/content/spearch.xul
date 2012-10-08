@@ -3,9 +3,7 @@
 <?xml-stylesheet href="chrome://spearch/content/spearch.css" type="text/css" ?>
 
 <overlay id="spearch" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-   <script src="spearch.js" />
    <script src="spearch.ui.jsm" />
-
    <toolbarpalette id="BrowserToolbarPalette">
       <toolbaritem id="spearch" removable="true" label="Spearch" flex="100">
          <textbox tabindex="1"
@@ -18,20 +16,29 @@
           autocompletesearchparam=""
           tabscrolling="true"
           showcommentcolumn="true"
-          onkeyup="return spearch.ui.onKeyUp(event)"
-          onkeydown="return spearch.ui.onKeyDown(event)"
-          oninput="spearch.ui.onInput(event)">
+          onkeyup="return spearch.ui.onKeyUp(getBrowser(), engineElement, queryElement, event)"
+          onkeydown="return spearch.ui.onKeyDown(engineElement, queryElement, event)"
+          oninput="spearch.ui.onInput(engineElement, queryElement, event)">
             <box align="start">
                <box class="engine" hidden="true">
                   <label value="$default" id="spearch-engine" onclick="spearch.ui.editEngine()" />
-                  <label value="⨯" onclick="spearch.ui.removeEngine()" />
+                  <label value="⨯" onclick="spearch.ui.removeEngine(engineElement, queryElement)" />
                </box>
             </box>
          </textbox>
          <panel type="autocomplete-richlistbox" id="spearch-suggestions" noautofocus="true" />
       </toolbaritem>
    </toolbarpalette>
-   <script>
-      window.addEventListener("load", spearch.ui.onWindowLoad, false);
+   <script type="text/javascript">
+      var queryElement = null;
+      var engineElement = null;
+
+      function onWindowLoad (e)
+      {
+         queryElement = window.document.getElementById("spearch-query");
+         engineElement = window.document.getElementById("spearch-engine");
+      }
+
+      window.addEventListener("load", onWindowLoad, false);
    </script>
 </overlay>

@@ -41,27 +41,16 @@ spearch.query =
       return newQuery;
    },
 
-   renderUrl: function (query)
+   renderUrl: function (engineName, query)
    {
-      query = query.trim();
-      var url_template = spearch.pref.getEngines()["$default"].url;
+      query = (query) ? query.trim() : "";
+      var urlTemplate = spearch.pref.getEngines()["$default"].url;
 
-      if (query[0] === "!")
+      if (engineName && engineName.length !== 0 && spearch.pref.hasEngine(engineName))
       {
-         var next_space = query.indexOf(" ");
-         if (next_space === -1)
-         {
-            next_space = query.length;
-         }
-
-         var engine_name = query.substring(1, next_space);
-         if (spearch.pref.getEngines().hasOwnProperty(engine_name))
-         {
-            url_template = spearch.pref.getEngines()[engine_name].url;
-            query = query.substring(next_space + 1);
-         }
+         urlTemplate = spearch.pref.getEngines()[engineName].url;
       }
-      return url_template.replace("%s", query);
+      return urlTemplate.replace("%s", query);
    }
 };
 
